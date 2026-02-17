@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LicenseType {
+  BASIC
+  PREMIUM
+  EXCLUSIVE
+}
+
+enum OrderStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentProvider {
+  STRIPE
+  PAYPAL
+}
+
+model Beat {
+  id            String      @id @default(cuid())
+  title         String
+  slug          String      @unique
+  bpm           Int
+  key           String
+  genre         String
+  tags          String[]    @default([])
+  price         Float
+  exclusivePrice Float?
+  licenseType   LicenseType @default(BASIC)
+  artworkUrl    String
+  artworkPublicId String
+  mp3Url        String      // Cloudinary secure URL for preview (tagged/watermarked)
+  mp3PublicId   String
+  wavUrl        String      // Cloudinary secure URL for full quality
+  wavPublicId   String
+  previewUrl    String      // Short tagged preview for the player
+  duration      Int         @default(0) // seconds
+  plays         Int         @default(0)
+  isActive      Boolean     @default(true)
+  isSold        Boolean     @default(false) // for exclusives
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  orderItems    OrderItem[]
+
+  @@index([genre])
+  @@index([isActive])
+  @@index([createdAt])
+}
+
+model Order {
+  id              String          @id @default(cuid())
+  email           String
+  customerName    String?
+  total           Float
+  status          OrderStatus     @default(PENDING)
+  paymentProvider PaymentProvider
+  paymentId       String          @unique // Stripe PaymentIntent ID or PayPal Order ID
+  downloadToken   String          @unique @default(cuid())
+  downloadCount   Int             @default(0)
+  maxDownloads    Int             @default(5)
+  tokenExpiresAt  DateTime
+  licensePdfUrl   String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  items           OrderItem[]
+
+  @@index([email])
+  @@index([downloadToken])
+  @@index([paymentId])
+}
+
+model OrderItem {
+  id          String      @id @default(cuid())
+  orderId     String
+  beatId      String
+  price       Float
+  licenseType LicenseType
+  order       Order       @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  beat        Beat        @relation(fields: [beatId], references: [id])
+
+  @@index([orderId])
+  @@index([beatId])
+}
