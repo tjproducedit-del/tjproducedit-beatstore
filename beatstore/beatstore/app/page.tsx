@@ -104,7 +104,7 @@ export default async function HomePage({ searchParams }: PageProps) {
           {[
             {
               name: "Basic Lease",
-              from: "$29.99",
+              from: "$20",
               features: [
                 "MP3 download (tagged)",
                 "Up to 5,000 streams",
@@ -114,7 +114,7 @@ export default async function HomePage({ searchParams }: PageProps) {
             },
             {
               name: "Premium Lease",
-              from: "$59.99",
+              from: "$50",
               features: [
                 "MP3 + WAV download",
                 "Up to 50,000 streams",
@@ -125,7 +125,7 @@ export default async function HomePage({ searchParams }: PageProps) {
             },
             {
               name: "Exclusive Rights",
-              from: "$299+",
+              from: "$250",
               features: [
                 "All file formats",
                 "Unlimited streams",

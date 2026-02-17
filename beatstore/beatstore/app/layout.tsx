@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "VOIDBEATS | Premium Beats & Instrumentals",
+  title: "TjProducedIt | Premium Beats & Instrumentals",
   description:
     "Shop exclusive beats, instrumentals, and productions. Instant delivery with license.",
   keywords: ["beats", "instrumentals", "hip hop", "trap", "R&B", "producer"],

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { HiOutlineEnvelope } from "react-icons/hi2";
-import { FaInstagram, FaYoutube, FaSoundcloud } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -11,10 +11,10 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
-                <span className="font-display font-bold text-surface text-sm">V</span>
+                <span className="font-display font-bold text-surface text-sm">Tj</span>
               </div>
               <span className="font-display font-bold text-lg text-neutral-50">
-                VOID<span className="text-accent">BEATS</span>
+                TjProduced<span className="text-accent">It</span>
               </span>
             </div>
             <p className="text-sm text-neutral-500 leading-relaxed max-w-xs">
@@ -41,50 +41,35 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Socials */}
+          {/* Contact */}
           <div>
             <h4 className="font-display font-semibold text-neutral-200 text-sm uppercase tracking-wider mb-4">
-              Connect
+              Contact
             </h4>
-            <div className="flex gap-3 mb-4">
+            <div className="flex flex-col gap-3">
               <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-surface-200 border border-surface-300
-                         flex items-center justify-center text-neutral-400 hover:text-accent
-                         hover:border-accent/30 transition-all"
+                href="https://instagram.com/tjproducedit"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-300 transition-colors"
               >
                 <FaInstagram className="w-4 h-4" />
+                @tjproducedit
               </a>
               <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-surface-200 border border-surface-300
-                         flex items-center justify-center text-neutral-400 hover:text-accent
-                         hover:border-accent/30 transition-all"
+                href="mailto:tjproducedit@gmail.com"
+                className="flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-300 transition-colors"
               >
-                <FaYoutube className="w-4 h-4" />
-              </a>
-              <a
-                href="#"
-                className="w-10 h-10 rounded-lg bg-surface-200 border border-surface-300
-                         flex items-center justify-center text-neutral-400 hover:text-accent
-                         hover:border-accent/30 transition-all"
-              >
-                <FaSoundcloud className="w-4 h-4" />
+                <HiOutlineEnvelope className="w-4 h-4" />
+                tjproducedit@gmail.com
               </a>
             </div>
-            <a
-              href="mailto:contact@voidbeats.com"
-              className="flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-300 transition-colors"
-            >
-              <HiOutlineEnvelope className="w-4 h-4" />
-              contact@voidbeats.com
-            </a>
           </div>
         </div>
 
         <div className="border-t border-surface-300 mt-12 pt-8 text-center">
           <p className="text-xs text-neutral-600">
-            &copy; {new Date().getFullYear()} VOIDBEATS. All rights reserved.
+            &copy; {new Date().getFullYear()} TjProducedIt. All rights reserved.
           </p>
         </div>
       </div>

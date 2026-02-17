@@ -41,7 +41,7 @@ export async function fulfillOrder(orderId: string) {
     licenseType: firstItem.licenseType,
     orderId: order.id,
     date: new Date().toISOString().split("T")[0],
-    producerName: "VOIDBEATS",
+    producerName: "TjProducedIt",
   });
 
   // Send download email

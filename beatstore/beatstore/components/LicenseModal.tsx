@@ -14,11 +14,11 @@ interface LicenseModalProps {
 function getPriceForLicense(beat: Beat, type: LicenseType): number {
   switch (type) {
     case "BASIC":
-      return beat.price;
+      return 20;
     case "PREMIUM":
-      return beat.price * 2;
+      return 50;
     case "EXCLUSIVE":
-      return beat.exclusivePrice || beat.price * 10;
+      return 250;
   }
 }
 

@@ -61,13 +61,13 @@ export async function POST(req: NextRequest) {
 
       switch (item.licenseType) {
         case "BASIC":
-          serverPrice = beat.price;
+          serverPrice = 20;
           break;
         case "PREMIUM":
-          serverPrice = beat.price * 2;
+          serverPrice = 50;
           break;
         case "EXCLUSIVE":
-          serverPrice = beat.exclusivePrice || beat.price * 10;
+          serverPrice = 250;
           break;
         default:
           throw new Error("Invalid license type");
