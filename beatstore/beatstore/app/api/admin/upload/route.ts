@@ -87,8 +87,5 @@ export async function POST(req: NextRequest) {
 }
 
 // Increase body size limit for file uploads
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const runtime = "nodejs";
+export const maxDuration = 60;
