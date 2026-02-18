@@ -10,7 +10,7 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import Header from "@/components/Header"; export const dynamic = "force-dynamic";
+import Header from "@/components/Header";
 import { useCartStore } from "@/hooks/use-cart";
 import { HiArrowLeft, HiCreditCard, HiLockClosed } from "react-icons/hi2";
 import { FaPaypal } from "react-icons/fa";
