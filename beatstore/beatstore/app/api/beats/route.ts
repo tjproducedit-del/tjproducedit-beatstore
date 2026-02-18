@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { rateLimit } from "@/lib/rate-limit";
-
+export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   const limited = await rateLimit(req);
   if (limited) return limited;

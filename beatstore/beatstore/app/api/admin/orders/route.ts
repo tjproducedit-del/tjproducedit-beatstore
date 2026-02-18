@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { verifyAdminRequest } from "@/lib/auth";
-
+export const dynamic = "force-dynamic";
 export async function GET(req: NextRequest) {
   if (!(await verifyAdminRequest(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
