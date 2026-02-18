@@ -17,10 +17,10 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center
                           group-hover:scale-105 transition-transform">
-              <span className="font-display font-bold text-surface text-sm">V</span>
+              <span className="font-display font-bold text-surface text-sm">Tj</span>
             </div>
             <span className="font-display font-bold text-lg text-neutral-50 tracking-tight">
-              VOID<span className="text-accent">BEATS</span>
+              TjProduced<span className="text-accent">It</span>
             </span>
           </Link>
 

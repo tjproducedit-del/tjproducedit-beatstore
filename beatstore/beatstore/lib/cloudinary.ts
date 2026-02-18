@@ -14,14 +14,17 @@ export async function uploadBeatFile(
   folder: string,
   resourceType: "video" | "image" | "raw" = "video"
 ) {
+  // WAV files stay authenticated (paid download only)
+  // MP3 files are public (for streaming preview)
+  const isWav = folder === "wav";
+
   return new Promise<{ url: string; publicId: string }>((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         folder: `beatstore/${folder}`,
         resource_type: resourceType,
-        // Prevent public access -- use signed URLs
-        type: "authenticated",
-        access_mode: "authenticated",
+        type: isWav ? "authenticated" : "upload",
+        ...(isWav ? { access_mode: "authenticated" } : {}),
       },
       (error, result) => {
         if (error || !result) return reject(error || new Error("Upload failed"));
@@ -52,13 +55,11 @@ export async function uploadArtwork(buffer: Buffer) {
 }
 
 export async function uploadPreview(buffer: Buffer) {
-  // Preview is a short tagged/watermarked clip for the public player
   return new Promise<{ url: string; publicId: string }>((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
         folder: "beatstore/previews",
         resource_type: "video",
-        // Previews are public for streaming
         type: "upload",
       },
       (error, result) => {
@@ -71,7 +72,6 @@ export async function uploadPreview(buffer: Buffer) {
 }
 
 export function getSignedDownloadUrl(publicId: string, resourceType: string) {
-  // Generate a time-limited signed URL for secure download
   const expiresAt = Math.floor(Date.now() / 1000) + 3600; // 1 hour
   return cloudinary.utils.private_download_url(publicId, "mp3", {
     resource_type: resourceType,

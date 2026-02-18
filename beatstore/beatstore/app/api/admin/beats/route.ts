@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
         tags: tags || [],
         price: Number(price),
         exclusivePrice: exclusivePrice ? Number(exclusivePrice) : null,
-        artworkUrl,
+        artworkUrl: artworkUrl || "https://res.cloudinary.com/demo/image/upload/v1/samples/landscapes/nature-mountains",
         artworkPublicId: artworkPublicId || "",
         mp3Url,
         mp3PublicId: mp3PublicId || "",

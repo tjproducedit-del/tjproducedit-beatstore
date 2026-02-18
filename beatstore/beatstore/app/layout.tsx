@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "TjProducedIt | Premium Beats & Instrumentals",
   description:
     "Shop exclusive beats, instrumentals, and productions. Instant delivery with license.",
-  keywords: ["beats", "instrumentals", "hip hop", "trap", "R&B", "producer"],
+  keywords: ["beats", "instrumentals", "hip hop", "trap", "R&B", "producer", "TjProducedIt"],
 };
 
 export default function RootLayout({
