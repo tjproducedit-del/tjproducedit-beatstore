@@ -1,7 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { constructWebhookEvent } from "@/lib/stripe";
 import { db } from "@/lib/db";
 import { fulfillOrder } from "./fulfill";
+
+export const dynamic = "force-dynamic";
+
 
 // Disable body parsing -- Stripe needs raw body
 export const runtime = "nodejs";

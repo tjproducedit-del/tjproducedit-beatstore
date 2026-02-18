@@ -1,8 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { capturePayPalOrder } from "@/lib/paypal";
 import { rateLimit } from "@/lib/rate-limit";
 import { fulfillOrder } from "@/app/api/webhooks/stripe/fulfill";
+
+export const dynamic = "force-dynamic";
+
 
 export async function POST(req: NextRequest) {
   const limited = await rateLimit(req);

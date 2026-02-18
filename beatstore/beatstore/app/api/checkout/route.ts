@@ -1,8 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { createPaymentIntent } from "@/lib/stripe";
 import { createPayPalOrder } from "@/lib/paypal";
 import { rateLimit } from "@/lib/rate-limit";
+
+export const dynamic = "force-dynamic";
+
 
 interface CheckoutItem {
   beatId: string;

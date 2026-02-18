@@ -1,7 +1,10 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { verifyAdminRequest } from "@/lib/auth";
 import { uploadBeatFile, uploadArtwork, uploadPreview } from "@/lib/cloudinary";
 import { rateLimit } from "@/lib/rate-limit";
+
+export const dynamic = "force-dynamic";
+
 
 export async function POST(req: NextRequest) {
   if (!(await verifyAdminRequest(req))) {

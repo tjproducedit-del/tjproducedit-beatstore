@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import {
   verifyUsername,
   verifyPassword,
@@ -7,6 +7,9 @@ import {
   clearSession,
 } from "@/lib/auth";
 import { rateLimit } from "@/lib/rate-limit";
+
+export const dynamic = "force-dynamic";
+
 
 export async function POST(req: NextRequest) {
   const limited = await rateLimit(req, "auth");
