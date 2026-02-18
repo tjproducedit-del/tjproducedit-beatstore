@@ -17,10 +17,10 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center
                           group-hover:scale-105 transition-transform">
-              <span className="font-display font-bold text-surface text-sm">Tj</span>
+              <span className="font-display font-bold text-surface text-sm">V</span>
             </div>
             <span className="font-display font-bold text-lg text-neutral-50 tracking-tight">
-              TjProduced<span className="text-accent">It</span>
+              VOID<span className="text-accent">BEATS</span>
             </span>
           </Link>
 
@@ -37,12 +37,6 @@ export default function Header() {
               className="text-sm font-medium text-neutral-400 hover:text-neutral-100 transition-colors"
             >
               Licenses
-            </Link>
-            <Link
-              href="/#contact"
-              className="text-sm font-medium text-neutral-400 hover:text-neutral-100 transition-colors"
-            >
-              Contact
             </Link>
           </nav>
 
@@ -93,13 +87,6 @@ export default function Header() {
               className="text-sm font-medium text-neutral-300 py-2"
             >
               Licenses
-            </Link>
-            <Link
-              href="/#contact"
-              onClick={() => setMobileOpen(false)}
-              className="text-sm font-medium text-neutral-300 py-2"
-            >
-              Contact
             </Link>
           </nav>
         </div>

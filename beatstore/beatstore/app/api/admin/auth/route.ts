@@ -1,4 +1,4 @@
-﻿import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import {
   verifyUsername,
   verifyPassword,
@@ -6,12 +6,19 @@ import {
   setSessionCookie,
   clearSession,
 } from "@/lib/auth";
-import { rateLimit } from "@/lib/rate-limit";
+import { rateLimit, recordFailedLogin, clearFailedLogins, isLockedOut } from "@/lib/rate-limit";
 
 export const dynamic = "force-dynamic";
 
-
 export async function POST(req: NextRequest) {
+  // Check lockout first
+  if (isLockedOut(req)) {
+    return NextResponse.json(
+      { error: "Too many failed attempts. Try again in 30 minutes." },
+      { status: 429 }
+    );
+  }
+
   const limited = await rateLimit(req, "auth");
   if (limited) return limited;
 
@@ -29,13 +36,17 @@ export async function POST(req: NextRequest) {
     const validPass = await verifyPassword(password);
 
     if (!validUser || !validPass) {
-      // Intentionally vague error
+      recordFailedLogin(req);
+      // Intentionally vague error + delay to slow brute force
+      await new Promise((r) => setTimeout(r, 1000 + Math.random() * 2000));
       return NextResponse.json(
         { error: "Invalid credentials" },
         { status: 401 }
       );
     }
 
+    // Successful login - clear failed attempts
+    clearFailedLogins(req);
     const token = await createSessionToken();
     await setSessionCookie(token);
 

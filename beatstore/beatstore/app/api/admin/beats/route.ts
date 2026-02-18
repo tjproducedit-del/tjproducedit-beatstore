@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { verifyAdminRequest } from "@/lib/auth";
 import { rateLimit } from "@/lib/rate-limit";
-export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   if (!(await verifyAdminRequest(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
     } = body;
 
     // Validate required fields
-    if (!title || !bpm || !key || !genre || !price) {
+    if (!title || !bpm || !genre || !price) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -74,7 +74,7 @@ export async function POST(req: NextRequest) {
         title,
         slug: finalSlug,
         bpm: Number(bpm),
-        key,
+        key: key || "",
         genre,
         tags: tags || [],
         price: Number(price),

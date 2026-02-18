@@ -23,7 +23,7 @@ export async function createSessionToken(): Promise<string> {
   return new SignJWT({ role: "admin" })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("24h")
+    .setExpirationTime("8h")
     .sign(JWT_SECRET);
 }
 
@@ -42,9 +42,9 @@ export async function setSessionCookie(token: string) {
   const cookieStore = await cookies();
   cookieStore.set(COOKIE_NAME, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 86400, // 24 hours
+    secure: true,
+    sameSite: "strict",
+    maxAge: 28800, // 8 hours
     path: "/",
   });
 }
@@ -70,7 +70,6 @@ export async function clearSession() {
   cookieStore.delete(COOKIE_NAME);
 }
 
-// Utility to hash a password (run once to generate ADMIN_PASSWORD_HASH)
 export async function hashPassword(password: string): Promise<string> {
   return bcrypt.hash(password, 12);
 }

@@ -12,7 +12,6 @@ import {
   HiCloudArrowUp,
 } from "react-icons/hi2";
 import toast from "react-hot-toast";
-export const dynamic = "force-dynamic";
 
 type Tab = "beats" | "orders" | "upload";
 
@@ -82,7 +81,7 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mx-auto mb-4">
-            <span className="font-display font-bold text-surface text-lg">V</span>
+            <span className="font-display font-bold text-surface text-lg">Tj</span>
           </div>
           <h1 className="font-display font-bold text-xl text-neutral-50">Admin Panel</h1>
           <p className="text-sm text-neutral-500 mt-1">Sign in to manage your beats</p>
@@ -159,22 +158,28 @@ function UploadBeatForm({ onSuccess }: { onSuccess: () => void }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!files.mp3 || !files.wav || !files.artwork) {
-      toast.error("MP3, WAV, and artwork files are required");
+    if (!files.mp3) {
+      toast.error("MP3 file is required");
       return;
     }
 
     setUploading(true);
 
     try {
-      setUploadStep("Uploading artwork...");
-      const artwork = await uploadFile(files.artwork, "artwork");
+      let artwork = { url: "", publicId: "" };
+      if (files.artwork) {
+        setUploadStep("Uploading artwork...");
+        artwork = await uploadFile(files.artwork, "artwork");
+      }
 
       setUploadStep("Uploading MP3...");
       const mp3 = await uploadFile(files.mp3, "mp3");
 
-      setUploadStep("Uploading WAV...");
-      const wav = await uploadFile(files.wav, "wav");
+      let wav = { url: mp3.url, publicId: mp3.publicId };
+      if (files.wav) {
+        setUploadStep("Uploading WAV...");
+        wav = await uploadFile(files.wav, "wav");
+      }
 
       let preview = { url: mp3.url, publicId: mp3.publicId };
       if (files.preview) {
@@ -273,7 +278,7 @@ function UploadBeatForm({ onSuccess }: { onSuccess: () => void }) {
         </div>
         <div>
           <label className="block text-xs font-medium text-neutral-400 mb-1.5">
-            Key *
+            Key
           </label>
           <select
             value={form.key}
@@ -347,12 +352,12 @@ function UploadBeatForm({ onSuccess }: { onSuccess: () => void }) {
           <div key={type}>
             <label className="block text-xs font-medium text-neutral-400 mb-1.5">
               {type === "artwork"
-                ? "Cover Artwork (JPG/PNG) *"
+                ? "Cover Artwork (JPG/PNG)"
                 : type === "mp3"
-                  ? "MP3 File *"
-                  : type === "wav"
-                    ? "WAV File *"
-                    : "Preview MP3 (optional, tagged)"}
+                ? "MP3 File *"
+                : type === "wav"
+                ? "WAV File"
+                : "Preview MP3 (optional, tagged)"}
             </label>
             <label className="flex items-center gap-3 p-3 bg-surface-200 border border-surface-400
                            rounded-lg cursor-pointer hover:border-accent/30 transition-all">
@@ -367,8 +372,8 @@ function UploadBeatForm({ onSuccess }: { onSuccess: () => void }) {
                   type === "artwork"
                     ? "image/jpeg,image/png,image/webp"
                     : type === "wav"
-                      ? "audio/wav"
-                      : "audio/mpeg"
+                    ? "audio/wav"
+                    : "audio/mpeg"
                 }
                 onChange={(e) =>
                   setFiles({ ...files, [type]: e.target.files?.[0] || null })
@@ -474,7 +479,7 @@ export default function AdminPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14">
           <div className="flex items-center gap-3">
             <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center">
-              <span className="font-display font-bold text-surface text-xs">V</span>
+              <span className="font-display font-bold text-surface text-xs">Tj</span>
             </div>
             <span className="font-display font-semibold text-neutral-100 text-sm">
               Admin Dashboard
@@ -529,10 +534,11 @@ export default function AdminPage() {
             <button
               key={id}
               onClick={() => setTab(id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${tab === id
-                ? "bg-accent text-surface"
-                : "text-neutral-400 hover:text-neutral-200 hover:bg-surface-200"
-                }`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                tab === id
+                  ? "bg-accent text-surface"
+                  : "text-neutral-400 hover:text-neutral-200 hover:bg-surface-200"
+              }`}
             >
               <Icon className="w-4 h-4" />
               {label}
@@ -635,12 +641,13 @@ export default function AdminPage() {
                     </div>
                     <div className="flex items-center gap-3">
                       <span
-                        className={`px-2 py-0.5 rounded text-xs font-medium ${order.status === "COMPLETED"
-                          ? "bg-green-500/20 text-green-400"
-                          : order.status === "FAILED"
+                        className={`px-2 py-0.5 rounded text-xs font-medium ${
+                          order.status === "COMPLETED"
+                            ? "bg-green-500/20 text-green-400"
+                            : order.status === "FAILED"
                             ? "bg-red-500/20 text-red-400"
                             : "bg-yellow-500/20 text-yellow-400"
-                          }`}
+                        }`}
                       >
                         {order.status}
                       </span>
