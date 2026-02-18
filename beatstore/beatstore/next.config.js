@@ -22,7 +22,7 @@ const nextConfig = {
         {
           key: "Content-Security-Policy",
           value:
-            "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://www.paypal.com; frame-src https://js.stripe.com https://www.paypal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://res.cloudinary.com;",
+            "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://www.paypal.com https://www.sandbox.paypal.com; frame-src https://js.stripe.com https://www.paypal.com https://www.sandbox.paypal.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://res.cloudinary.com; media-src 'self' https://res.cloudinary.com blob:; connect-src 'self' https://api.stripe.com https://www.paypal.com https://www.sandbox.paypal.com https://res.cloudinary.com;",
         },
       ],
     },
