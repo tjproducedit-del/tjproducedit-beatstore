@@ -10,12 +10,13 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
-import Header from "@/components/Header";
+import Header from "@/components/Header"; export const dynamic = "force-dynamic";
 import { useCartStore } from "@/hooks/use-cart";
 import { HiArrowLeft, HiCreditCard, HiLockClosed } from "react-icons/hi2";
 import { FaPaypal } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Link from "next/link";
+export const dynamic = "force-dynamic";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -284,11 +285,10 @@ export default function CheckoutPage() {
           <button
             onClick={() => setPaymentMethod("stripe")}
             className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-medium text-sm
-                      transition-all ${
-                        paymentMethod === "stripe"
-                          ? "bg-accent text-surface"
-                          : "bg-surface-200 text-neutral-400 border border-surface-300"
-                      }`}
+                      transition-all ${paymentMethod === "stripe"
+                ? "bg-accent text-surface"
+                : "bg-surface-200 text-neutral-400 border border-surface-300"
+              }`}
           >
             <HiCreditCard className="w-4 h-4" />
             Card / Apple Pay
@@ -296,11 +296,10 @@ export default function CheckoutPage() {
           <button
             onClick={() => setPaymentMethod("paypal")}
             className={`flex-1 flex items-center justify-center gap-2 py-3 rounded-lg font-medium text-sm
-                      transition-all ${
-                        paymentMethod === "paypal"
-                          ? "bg-accent text-surface"
-                          : "bg-surface-200 text-neutral-400 border border-surface-300"
-                      }`}
+                      transition-all ${paymentMethod === "paypal"
+                ? "bg-accent text-surface"
+                : "bg-surface-200 text-neutral-400 border border-surface-300"
+              }`}
           >
             <FaPaypal className="w-4 h-4" />
             PayPal

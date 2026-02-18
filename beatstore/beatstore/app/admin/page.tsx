@@ -12,6 +12,7 @@ import {
   HiCloudArrowUp,
 } from "react-icons/hi2";
 import toast from "react-hot-toast";
+export const dynamic = "force-dynamic";
 
 type Tab = "beats" | "orders" | "upload";
 
@@ -348,10 +349,10 @@ function UploadBeatForm({ onSuccess }: { onSuccess: () => void }) {
               {type === "artwork"
                 ? "Cover Artwork (JPG/PNG) *"
                 : type === "mp3"
-                ? "MP3 File *"
-                : type === "wav"
-                ? "WAV File *"
-                : "Preview MP3 (optional, tagged)"}
+                  ? "MP3 File *"
+                  : type === "wav"
+                    ? "WAV File *"
+                    : "Preview MP3 (optional, tagged)"}
             </label>
             <label className="flex items-center gap-3 p-3 bg-surface-200 border border-surface-400
                            rounded-lg cursor-pointer hover:border-accent/30 transition-all">
@@ -366,8 +367,8 @@ function UploadBeatForm({ onSuccess }: { onSuccess: () => void }) {
                   type === "artwork"
                     ? "image/jpeg,image/png,image/webp"
                     : type === "wav"
-                    ? "audio/wav"
-                    : "audio/mpeg"
+                      ? "audio/wav"
+                      : "audio/mpeg"
                 }
                 onChange={(e) =>
                   setFiles({ ...files, [type]: e.target.files?.[0] || null })
@@ -528,11 +529,10 @@ export default function AdminPage() {
             <button
               key={id}
               onClick={() => setTab(id)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                tab === id
-                  ? "bg-accent text-surface"
-                  : "text-neutral-400 hover:text-neutral-200 hover:bg-surface-200"
-              }`}
+              className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${tab === id
+                ? "bg-accent text-surface"
+                : "text-neutral-400 hover:text-neutral-200 hover:bg-surface-200"
+                }`}
             >
               <Icon className="w-4 h-4" />
               {label}
@@ -635,13 +635,12 @@ export default function AdminPage() {
                     </div>
                     <div className="flex items-center gap-3">
                       <span
-                        className={`px-2 py-0.5 rounded text-xs font-medium ${
-                          order.status === "COMPLETED"
-                            ? "bg-green-500/20 text-green-400"
-                            : order.status === "FAILED"
+                        className={`px-2 py-0.5 rounded text-xs font-medium ${order.status === "COMPLETED"
+                          ? "bg-green-500/20 text-green-400"
+                          : order.status === "FAILED"
                             ? "bg-red-500/20 text-red-400"
                             : "bg-yellow-500/20 text-yellow-400"
-                        }`}
+                          }`}
                       >
                         {order.status}
                       </span>

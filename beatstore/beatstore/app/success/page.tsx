@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Header from "@/components/Header";
 import { HiCheckCircle, HiEnvelope, HiArrowDownTray } from "react-icons/hi2";
-
+export const dynamic = "force-dynamic";
 export default function SuccessPage() {
   return (
     <div className="min-h-screen">

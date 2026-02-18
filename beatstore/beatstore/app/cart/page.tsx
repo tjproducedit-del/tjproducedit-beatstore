@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import GlobalPlayer from "@/components/player/GlobalPlayer";
 import { useCartStore } from "@/hooks/use-cart";
 import { HiXMark, HiArrowLeft, HiShoppingBag } from "react-icons/hi2";
+export const dynamic = "force-dynamic";
 
 export default function CartPage() {
   const { items, removeItem, getTotal } = useCartStore();

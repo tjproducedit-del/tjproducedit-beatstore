@@ -6,6 +6,7 @@ import SearchFilter from "@/components/SearchFilter";
 import BeatGrid from "@/components/BeatGrid";
 import GlobalPlayer from "@/components/player/GlobalPlayer";
 import { HiCheck, HiMusicalNote, HiShieldCheck, HiBolt } from "react-icons/hi2";
+export const dynamic = "force-dynamic";
 
 interface PageProps {
   searchParams: Promise<{ q?: string; genre?: string }>;
@@ -136,11 +137,10 @@ export default async function HomePage({ searchParams }: PageProps) {
           ].map((tier) => (
             <div
               key={tier.name}
-              className={`rounded-xl border p-6 transition-all ${
-                tier.popular
-                  ? "border-accent/30 bg-accent/5 glow-sm relative"
-                  : "border-surface-300 bg-surface-100"
-              }`}
+              className={`rounded-xl border p-6 transition-all ${tier.popular
+                ? "border-accent/30 bg-accent/5 glow-sm relative"
+                : "border-surface-300 bg-surface-100"
+                }`}
             >
               {tier.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 bg-accent
